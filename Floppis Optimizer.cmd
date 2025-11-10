@@ -14,21 +14,21 @@ echo =-= -Categories-                                                           
 echo =-=                                                                            =-=
 echo =-= [1] System Optimizations                                                   =-=
 echo =-= [2] User Optimizations                                                     =-=
-echo =-= [3] App Behavior                                                           =-=
-echo =-= [4] Privacy Tweaks                                                         =-=
-echo =-= [5] User Interface Settings                                                =-=
-echo =-= [6] Windows Update Options                                                 =-=
-echo =-= [7] Windows 10 Specific Tweaks                                             =-=
-echo =-= [8] Windows 11 Specific Tweaks                                             =-=
-echo =-= [9] Graphics\GPU Tweaking Apps                                             =-=
-echo =-= [10] Optimization Tools App Installer                                      =-=
+echo =-= [3] Privacy Tweaks                                                         =-=
+echo =-= [4] User Interface Settings                                                =-=
+echo =-= [5] Windows Update Options                                                 =-=
+echo =-= [6] Windows 10 Specific Tweaks                                             =-=
+echo =-= [7] Windows 11 Specific Tweaks                                             =-=
+echo =-= [8] Graphics\GPU Tweaking Apps                                             =-=
+echo =-= [9] Optimization Tools App Installers                                      =-=
+echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-= [!] Restart System For Best Results                                        =-=
 echo =-=                                                                            =-=
 echo =-= [0] Exit Script (Cleans Temporary Files)                                   =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto sysopt) else if '%s%'=='2' (goto useropt) else if '%s%'=='3' (goto appbeh) else if '%s%'=='4' (goto privtw) else if '%s%'=='5' (goto userint) else if '%s%'=='6' (goto wuopt) else if '%s%'=='7' (goto w10st) else if '%s%'=='8' (goto w11st) else if '%s%'=='9' (goto gputwapp) else if '%s%'=='10' (goto toolsinst)
+if '%s%'=='1' (goto sysopt) else if '%s%'=='2' (goto useropt) else if '%s%'=='3' (goto privtw) else if '%s%'=='4' (goto userint) else if '%s%'=='5' (goto wuopt) else if '%s%'=='6' (goto w10st) else if '%s%'=='7' (goto w11st) else if '%s%'=='8' (goto gputwapp) else if '%s%'=='9' (goto toolsinst)
 if not '%s%'=='0' goto startmenu
 goto ext
 
@@ -725,15 +725,258 @@ goto pgtw
 
 :useropt
 title Floppi's Optimizer - User Optimizations
+set s=
 cls
-pause
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -User Optimizations-                                                       =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Categories-                                                               =-=
+echo =-=                                                                            =-=
+echo =-= [1] Background Apps Management                                             =-=
+echo =-= [2] Game Mode Switch                                                       =-=
+echo =-= [3] Game DVR (Game Capture)                                                =-=
+echo =-= [4] Hardware Accelerated GPU Scheduling Settings                           =-=
+echo =-= [5] Variable Refresh Rate Switch                                           =-=
+echo =-= [6] Windows Performance Options                                            =-=
+echo =-= [7] Adjust Page File Size                                                  =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-= [0] Go To Main Menu                                                        =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set /p s=Number: 
+if '%s%'=='1' (goto bgapp) else if '%s%'=='2' (goto gms) else if '%s%'=='3' (goto gdvr) else if '%s%'=='4' (goto hagss) else if '%s%'=='5' (goto vrrs) else if '%s%'=='6' (goto wpo) else if '%s%'=='7' (goto pfs)
+if not '%s%'=='0' goto useropt
 goto startmenu
 
-:appbeh
-title Floppi's Optimizer - App Behavior
+:bgapp
+set s=
 cls
-pause
-goto startmenu
+echo = Background Apps - Applications that are running in the background.
+echo.
+echo = -Options-
+echo = [1] Disable Background Apps (Recommended)
+echo = [2] Enable Background Apps (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto bga1) else if '%s%'=='2' (goto bga2)
+if not '%s%'=='0' goto bgapp
+goto useropt
+
+:bga1
+cls
+echo Changing Registry Value...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto bgapp
+
+:bga2
+cls
+echo Changing Registry Value...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto bgapp
+
+:gms
+set s=
+cls
+echo = Game Mode - Windows 10\11 Feature "Prioritizing games" (Fake Information)
+echo.
+echo = -Options-
+echo = [1] Disable Game Mode (Recommended)
+echo = [2] Enable Game Mode (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto gmd) else if '%s%'=='2' (goto gme)
+if not '%s%'=='0' goto gms
+goto useropt
+
+:gmd
+cls
+echo Changing Game Mode...
+reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 0 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto gms
+
+:gme
+cls
+echo Changing Game Mode...
+reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto gms
+
+:gdvr
+set s=
+cls
+echo = Game DVR - Windows 10\11 feature recording games silently.
+echo.
+echo = -Options-
+echo = [1] Disable Game DVR (Recommended)
+echo = [2] Enable Game DVR (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto gdvrd) else if '%s%'=='2' (goto gdvre)
+if not '%s%'=='0' goto gdvr
+goto useropt
+
+:gdvrd
+cls
+echo Changing Game DVR...
+reg add "HKCU\System\GameConfigStore" /v GameDVR_Enabled /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 0 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto gdvr
+
+:gdvre
+cls
+echo Changing Game DVR...
+reg add "HKCU\System\GameConfigStore" /v GameDVR_Enabled /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto gdvr
+
+:hagss
+set s=
+cls
+echo = Hardware Accelerated GPU Scheduling - Uses GPU for system processes.
+echo.
+echo = -Options-
+echo = [1] Disable HAGS (Recommended)
+echo = [2] Enable HAGS (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto hagsd) else if '%s%'=='2' (goto hagse)
+if not '%s%'=='0' goto hagss
+goto useropt
+
+:hagsd
+cls
+echo Changing HAGS...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v HwSchMode /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto hagss
+
+:hagse
+cls
+echo Changing HAGS...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v HwSchMode /t REG_DWORD /d 2 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto hagss
+
+:vrrs
+set s=
+cls
+echo = Variable Refresh Rate - Dynamic refresh rate for applications.
+echo.
+echo = -Options-
+echo = [1] Disable VRR 
+echo = [2] Enable VRR (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto vrre) else if '%s%'=='2' (goto vrrd)
+if not '%s%'=='0' goto vrrs
+goto useropt
+
+:vrrd
+cls
+echo Changing VRR...
+reg add "HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences" /v DirectXUserGlobalSettings /t REG_SZ /d "VRROptimizeEnable=1;" /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto vrrs
+
+:vrre
+cls
+echo Changing VRR...
+reg add "HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences" /v DirectXUserGlobalSettings /t REG_SZ /d "VRROptimizeEnable=0;" /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto vrrs
+
+:wpo
+cls
+echo Launching Performance Options...
+echo.
+echo Choose your preferred option.
+start /wait "" "C:\Windows\System32\SystemPropertiesPerformance.exe"
+echo Going back...
+timeout /nobreak 3 >nul
+goto useropt
+
+:pfs
+set s=
+cls
+echo = Page File - Amount of disk space reserved to off-load ram. (Swap File)
+echo.
+echo = -Options-
+echo = [1] 8GB Page File Size
+echo = [2] 4GB Page File Size
+echo = [3] 2GB Page File Size
+echo = [4] Disable Page File
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto pfs1) else if '%s%'=='2' (goto pfs2) else if '%s%'=='3' (goto pfs3) else if '%s%'=='4' (goto pfs4)
+if not '%s%'=='0' goto pfs
+goto useropt
+
+:pfs1
+cls
+echo Changing Page File Size...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 8192" /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto pfs
+
+:pfs2
+cls
+echo Changing Page File Size...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 4096" /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto pfs
+
+:pfs3
+cls
+echo Changing Page File Size...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 2048" /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto pfs
+
+:pfs4
+cls
+echo Changing Page File Size...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "" /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto pfs
+
+
 
 :privtw
 title Floppi's Optimizer - Privacy Tweaks
@@ -741,11 +984,15 @@ cls
 pause
 goto startmenu
 
+
+
 :userint
 title Floppi's Optimizer - User Interface Settings
 cls
 pause
 goto startmenu
+
+
 
 :wuopt
 title Floppi's Optimizer - Windows Update Options
@@ -753,11 +1000,15 @@ cls
 pause
 goto startmenu
 
+
+
 :w10st
 title Floppi's Optimizer - Windows 10 Specific Tweaks
 cls
 pause
 goto startmenu
+
+
 
 :w11st
 title Floppi's Optimizer - Windows 11 Specific Tweaks
@@ -765,11 +1016,15 @@ cls
 pause
 goto startmenu
 
+
+
 :gputwapp
 title Floppi's Optimizer - Graphics\GPU Tweaking Apps
 cls
 pause
 goto startmenu
+
+
 
 :toolsinst
 title Floppi's Optimizer - Optimization Tools App Installer
