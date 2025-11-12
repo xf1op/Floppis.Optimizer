@@ -1,6 +1,7 @@
 @echo off
-md %temp%\FOptimizer
-cd %temp%\FOptimizer
+set Fdir=%temp%\FOptimizer
+md %Fdir%
+cd %Fdir%
 color 0a
 :startmenu
 mode 82,21
@@ -18,7 +19,7 @@ echo =-= [3] Privacy Tweaks                                                     
 echo =-= [4] User Interface Settings                                                =-=
 echo =-= [5] Network Tweaks                                                         =-=
 echo =-= [6] Graphics\GPU Tweaking Apps                                             =-=
-echo =-= [7] Optimization Tools App Installers                                      =-=
+echo =-= [7] Optimization Tools Installer                                           =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -41,7 +42,7 @@ cls
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo =-= -System Optimizations-                                                     =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo =-= -Categories-                                                               =-=
+echo =-= -Options-                                                                  =-=
 echo =-=                                                                            =-=
 echo =-= [1] Windows Priority Separation                                            =-=
 echo =-= [2] System Responsiveness                                                  =-=
@@ -161,7 +162,7 @@ cls
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo =-= -System Service Management-                                                =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo =-= -Categories-                                                               =-=
+echo =-= -Options-                                                                  =-=
 echo =-=                                                                            =-=
 echo =-= [1] Windows Search                                                         =-=
 echo =-= [2] Diagnostics                                                            =-=
@@ -716,7 +717,7 @@ cls
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo =-= -User Optimizations-                                                       =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo =-= -Categories-                                                               =-=
+echo =-= -Options-                                                                  =-=
 echo =-=                                                                            =-=
 echo =-= [1] Background Apps Management                                             =-=
 echo =-= [2] Game Mode Switch                                                       =-=
@@ -971,14 +972,14 @@ cls
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo =-= -Privacy Tweaks-                                                           =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo =-= -Categories-                                                               =-=
+echo =-= -Options-                                                                  =-=
 echo =-=                                                                            =-=
 echo =-= [1] Change App Access To Various Things                                    =-=
 echo =-= [2] Data Collecting System Services                                        =-=
 echo =-= [3] Telemetry Options                                                      =-=
 echo =-= [4] Content Delivery Manager                                               =-=
 echo =-= [5] Windows Privacy Settings                                               =-=
-echo =-=                                                                            =-=
+echo =-= [6] Windows Recall Functionality                                           =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -989,7 +990,7 @@ echo =-=                                                                        
 echo =-= [0] Go To Main Menu                                                        =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto caat) else if '%s%'=='2' (goto dcss) else if '%s%'=='3' (goto to) else if '%s%'=='4' (goto cdm) else if '%s%'=='5' (goto wps)
+if '%s%'=='1' (goto caat) else if '%s%'=='2' (goto dcss) else if '%s%'=='3' (goto to) else if '%s%'=='4' (goto cdm) else if '%s%'=='5' (goto wps) else if '%s%'=='6' (goto wrf)
 if not '%s%'=='0' goto privtw
 goto startmenu
 
@@ -1370,6 +1371,45 @@ start "" ms-settings:privacy
 timeout /nobreak 3 >nul
 goto privtw
 
+:wrf
+set s=
+cls
+echo = Windows Recall - A thing that may steal your personal information.
+echo.
+echo = -Options-
+echo = [1] Disable Recall (Recommended)
+echo = [2] Enable Recall (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto wrf1) else if '%s%'=='2' (goto wrf2)
+if not '%s%'=='0' goto wrf
+goto privtw
+
+:wrf1
+cls
+echo Disabling Recall Functionality...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v AllowRecallEnablement /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v AllowRecallExport /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableClickToDo /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableSettingsAgent /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto privtw
+
+:wrf2
+cls
+echo Enabling Recall Functionality...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v AllowRecallEnablement /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v AllowRecallExport /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableClickToDo /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableSettingsAgent /t REG_DWORD /d 0 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto privtw
 
 :: User interface settings section
 
@@ -1380,7 +1420,7 @@ cls
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo =-= -User Interface Settings-                                                  =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo =-= -Categories-                                                               =-=
+echo =-= -Options-                                                                  =-=
 echo =-=                                                                            =-=
 echo =-= [1] Change Windows Theme And Apps Theme                                    =-=
 echo =-= [2] Change Dragging Width And Height                                       =-=
@@ -1515,6 +1555,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsAAD
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsDeviceSearchHistoryEnabled /t REG_SZ /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsDynamicSearchBoxEnabled /t REG_SZ /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsMSACloudSearchEnabled /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCloudSearch /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearchToUseLocation /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v ConnectedSearchUseWeb /t REG_SZ /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto sbo
@@ -1528,6 +1572,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsAAD
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsDeviceSearchHistoryEnabled /t REG_SZ /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsDynamicSearchBoxEnabled /t REG_SZ /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v IsMSACloudSearchEnabled /t REG_SZ /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCloudSearch /t REG_SZ /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_SZ /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearchToUseLocation /t REG_SZ /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v ConnectedSearchUseWeb /t REG_SZ /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto sbo
@@ -1541,7 +1589,7 @@ cls
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo =-= -Network Tweaks-                                                           =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo =-= -Categories-                                                               =-=
+echo =-= -Options-                                                                  =-=
 echo =-=                                                                            =-=
 echo =-= [1] Optimize UDP Connection                                                =-=
 echo =-= [2] Manage TCP Auto-Tuning                                                 =-=
@@ -1656,6 +1704,7 @@ goto nwkt
 :dns1
 cls
 echo Changing DNS...
+ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ServerAddresses (\"1.1.1.1\", \"1.0.0.1\")"
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
@@ -1664,6 +1713,7 @@ goto nwkt3
 :dns2
 cls
 echo Changing DNS...
+ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ServerAddresses (\"8.8.8.8\", \"8.8.4.4\")"
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
@@ -1672,6 +1722,7 @@ goto nwkt3
 :dns3
 cls
 echo Changing DNS...
+ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ResetServerAddresses"
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
@@ -1680,18 +1731,150 @@ goto nwkt3
 :: Graphics tweaking apps section
 
 :gputwapp
-title Floppi's Optimizer - Graphics\GPU Tweaking Apps
+title Floppi's Optimizer - Graphics Tweaking Apps
+set s=
 cls
-pause
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Graphics Tweaking Apps-                                                   =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Options-                                                                  =-=
+echo =-=                                                                            =-=
+echo =-= [1] Install MSI Afterburner                                                =-=
+echo =-= [2] Install EVGA Precision X                                               =-=
+echo =-= [3] Install Asus GPU Tweak                                                 =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-= [0] Go To Main Menu                                                        =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set /p s=Number: 
+if '%s%'=='1' (goto gta1) else if '%s%'=='2' (goto gta2) else if '%s%'=='3' (goto gta3)
+if not '%s%'=='0' goto gputwapp
 goto startmenu
+
+:gta1
+cls
+echo Downloading MSI Afterburner...
+powershell -Command "Invoke-WebRequest -Uri 'https://download-2.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip?__token__=exp=1763090956~acl=/*~hmac=51deed9a8fd1c00752d6553389bd13b5f08df49395a069a49abd211115d4d796' -OutFile '%Fdir%\Afterburner.zip'"
+echo Extracting zip...
+tar -xf "%Fdir%\Afterburner.zip"
+timeout /nobreak 2 >nul
+echo Starting Installer...
+for %%F in ("%Fdir%\MSIAfterburner*.exe") do start "" "%%F"
+goto gputwapp
+
+:gta2
+cls
+echo Downloading EVGA Precision X
+powershell -Command "Invoke-WebRequest -Uri 'https://cdn.evga.com/software/EVGA_Precision_X1_1.3.7.0.zip' -OutFile '%Fdir%\PrecisionX.zip'"
+echo Extracting zip...
+tar -xf "%Fdir%\PrecisionX.zip"
+timeout /nobreak 2 >nul
+echo Starting Installer...
+for %%F in ("%Fdir%\EVGA Precision*.exe") do start "" "%%F"
+goto gputwapp
+
+:gta3
+cls
+echo Downloading EVGA Precision X
+powershell -Command "Invoke-WebRequest -Uri 'https://dlcdnets.asus.com/pub/ASUS/Graphic%20Card/Unique_Applications/GPU-Tweak-III-v2045.zip' -OutFile '%Fdir%\AsusTweak.zip'"
+echo Extracting zip...
+tar -xf "%Fdir%\AsusTweak.zip"
+timeout /nobreak 2 >nul
+echo Starting Installer...
+for %%F in ("%Fdir%\GPU Tweak*.exe") do start "" "%%F"
+goto gputwapp
 
 :: Tool installing section
 
 :toolsinst
-title Floppi's Optimizer - Optimization Tools App Installer
+title Floppi's Optimizer - Optimization Tools Installer
+set s=
 cls
-pause
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Optimization Tools Installer-                                             =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Options-                                                                  =-=
+echo =-=                                                                            =-=
+echo =-= [1] Install Mem Reduct                                                     =-=
+echo =-= [2] Install Process Lasso                                                  =-=
+echo =-= [3] Download Windows Privacy Dashboard                                     =-=
+echo =-= [4] Download O^&O ShutUp10++                                                =-=
+echo =-= [5] Download O^&O AppBuster                                                 =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-= [0] Go To Main Menu                                                        =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set /p s=Number: 
+if '%s%'=='1' (goto ti1) else if '%s%'=='2' (goto ti2) else if '%s%'=='3' (goto ti3) else if '%s%'=='4' (goto ti4) else if '%s%'=='5' (goto ti5)
+if not '%s%'=='0' goto toolsinst
 goto startmenu
+
+:ti1
+cls
+echo Downloading Mem Reduct...
+powershell -Command "Invoke-WebRequest -Uri 'https://github.com/henrypp/memreduct/releases/download/v.3.5.2/memreduct-3.5.2-setup.exe' -OutFile '%Fdir%\memreduct.exe'"
+timeout /nobreak 2 >nul
+echo Starting Installer...
+start "" memreduct.exe
+timeout /nobreak 3 >nul
+goto toolsinst
+
+:ti2
+cls
+echo Downloading Process Lasso...
+powershell -Command "Invoke-WebRequest -Uri 'https://dl.bitsum.com/files/processlassosetup64.exe' -OutFile '%Fdir%\processlasso.exe'"
+timeout /nobreak 2 >nul
+echo Starting App...
+start "" processlasso.exe
+timeout /nobreak 3 >nul
+goto toolsinst
+
+:ti3
+cls
+echo Downloading Windows Privacy Dashboard...
+powershell -Command "Invoke-WebRequest -Uri 'https://wpd.app/get/latest.zip' -OutFile '%Fdir%\wpd.zip'"
+echo Extracting zip...
+tar -xf "%Fdir%\wpd.zip"
+timeout /nobreak 2 >nul
+echo Starting App...
+for %%F in ("%Fdir%\WPD*.exe") do start "" "%%F"
+timeout /nobreak 3 >nul
+goto toolsinst
+
+:ti4
+cls
+echo Downloading O^&O ShutUp10++...
+powershell -Command "Invoke-WebRequest -Uri 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile '%Fdir%\OOSU.exe'"
+timeout /nobreak 2 >nul
+echo Starting App...
+start "" OOSU.exe
+timeout /nobreak 3 >nul
+goto toolsinst
+
+
+:ti5
+cls
+echo Downloading O^&O AppBuster...
+powershell -Command "Invoke-WebRequest -Uri 'https://dl5.oo-software.com/files/ooappbuster/OOAPB.exe' -OutFile '%Fdir%\OOAB.exe'"
+timeout /nobreak 2 >nul
+echo Starting App...
+start "" OOAB.exe
+timeout /nobreak 3 >nul
+goto toolsinst
 
 :: Exit Section
 
