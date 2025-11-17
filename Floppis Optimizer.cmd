@@ -776,7 +776,7 @@ goto bgapp
 :gms
 set s=
 cls
-echo = Game Mode - Windows 10\11 Feature "Prioritizing games" (Fake Information)
+echo = Game Mode - Windows 10\11 Feature "Prioritizing games" which is false.
 echo.
 echo = -Options-
 echo = [1] Disable Game Mode (Recommended)
@@ -793,6 +793,7 @@ goto useropt
 cls
 echo Changing Game Mode...
 reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto gms
@@ -801,6 +802,7 @@ goto gms
 cls
 echo Changing Game Mode...
 reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto gms
@@ -980,7 +982,7 @@ echo =-= [3] Telemetry Options                                                  
 echo =-= [4] Content Delivery Manager                                               =-=
 echo =-= [5] Windows Privacy Settings                                               =-=
 echo =-= [6] Windows Recall Functionality                                           =-=
-echo =-=                                                                            =-=
+echo =-= [7] Cloud Content Management                                               =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -990,7 +992,7 @@ echo =-=                                                                        
 echo =-= [0] Go To Main Menu                                                        =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto caat) else if '%s%'=='2' (goto dcss) else if '%s%'=='3' (goto to) else if '%s%'=='4' (goto cdm) else if '%s%'=='5' (goto wps) else if '%s%'=='6' (goto wrf)
+if '%s%'=='1' (goto caat) else if '%s%'=='2' (goto dcss) else if '%s%'=='3' (goto to) else if '%s%'=='4' (goto cdm) else if '%s%'=='5' (goto wps) else if '%s%'=='6' (goto wrf) else if '%s%'=='6' (goto ccm)
 if not '%s%'=='0' goto privtw
 goto startmenu
 
@@ -1415,6 +1417,50 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v AllowRecallExpor
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableAIDataAnalysis /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableClickToDo /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableSettingsAgent /t REG_DWORD /d 0 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto privtw
+
+:ccm
+set s=
+cls
+echo = Cloud Content - Personalized and suggested content from web.
+echo.
+echo = -Options-
+echo = [1] Disable Cloud Content (Recommended)
+echo = [2] Enable Cloud Content (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto ccm1) else if '%s%'=='2' (goto ccm2)
+if not '%s%'=='0' goto ccm
+goto privtw
+
+:ccm1
+cls
+echo Disabling Cloud Content...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableCloudOptimizedContent /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableConsumerAccountStateContent /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableSoftLanding /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableThirdPartySuggestions /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWelcomeExperience /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto privtw
+
+:ccm2
+cls
+echo Enabling Cloud Content...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableCloudOptimizedContent /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableConsumerAccountStateContent /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableSoftLanding /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableThirdPartySuggestions /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWelcomeExperience /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto privtw
