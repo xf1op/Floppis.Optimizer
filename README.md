@@ -8,6 +8,8 @@ Main menu of the script.
 
 Trying to make it simple and reliable.
 
+If script errors, it will ask you to open it as administrator or just continue.
+
 ## Purpose of the optimizer:
 - Be reversible in changes
 - Disable unnecessary services
