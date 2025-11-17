@@ -987,7 +987,7 @@ echo =-=                                                                        
 echo =-= [0] Go To Main Menu                                                        =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto caat) else if '%s%'=='2' (goto dcss) else if '%s%'=='3' (goto to) else if '%s%'=='4' (goto cdm) else if '%s%'=='5' (goto wps) else if '%s%'=='6' (goto wrf) else if '%s%'=='6' (goto ccm)
+if '%s%'=='1' (goto caat) else if '%s%'=='2' (goto dcss) else if '%s%'=='3' (goto to) else if '%s%'=='4' (goto cdm) else if '%s%'=='5' (goto wps) else if '%s%'=='6' (goto wrf) else if '%s%'=='7' (goto ccm)
 if not '%s%'=='0' goto privtw
 goto startmenu
 
