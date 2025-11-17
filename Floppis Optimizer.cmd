@@ -96,7 +96,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 0x24 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto winps
+goto sysopt
 
 :wps2
 cls
@@ -104,7 +104,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 0x28 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto winps
+goto sysopt
 
 :wps3
 cls
@@ -112,7 +112,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 0x26 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto winps
+goto sysopt
 
 :sysr
 set s=
@@ -146,7 +146,7 @@ echo Changing Registry Value...
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 0xa /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto sysr
+goto sysopt
 
 :sr2
 cls
@@ -154,7 +154,7 @@ echo Changing Registry Value...
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 0x14 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto sysr
+goto sysopt
 
 :syssrvmg
 set s=
@@ -554,7 +554,7 @@ for /f %%A in ('powershell -command "(Get-MMAgent).MemoryCompression"') do (
     )
 )
 timeout /nobreak 3 >nul
-goto sysmc
+goto sysopt
 
 :smc2
 cls
@@ -570,7 +570,7 @@ for /f %%A in ('powershell -command "(Get-MMAgent).MemoryCompression"') do (
     )
 )
 timeout /nobreak 3 >nul
-goto sysmc
+goto sysopt
 
 :sertimex
 set s=
@@ -604,7 +604,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v SerializeTimerExpiration /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto sertimex
+goto sysopt
 
 :stes2
 cls
@@ -612,7 +612,7 @@ echo Changing Registry Value...
 reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v SerializeTimerExpiration /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto sertimex
+goto sysopt
 
 :bcdtw
 set s=
@@ -647,7 +647,7 @@ bcdedit /set useplatformtick yes
 bcdedit /set disabledynamictick yes
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto bcdtw
+goto sysopt
 
 :bcd2
 cls
@@ -656,7 +656,7 @@ bcdedit /deletevalue {current} useplatformtick
 bcdedit /deletevalue {current} disabledynamictick
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto bcdtw
+goto sysopt
 
 :pgtw
 set s=
@@ -690,7 +690,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 0xffffffff /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pgtw
+goto sysopt
 
 :pgt2
 cls
@@ -698,7 +698,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pgtw
+goto sysopt
 
 :pgt3
 cls
@@ -706,7 +706,7 @@ echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 0x00380000 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pgtw
+goto sysopt
 
 :: User optimizations Section
 
@@ -762,7 +762,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplicat
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto bgapp
+goto useropt
 
 :bga2
 cls
@@ -771,7 +771,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplicat
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto bgapp
+goto useropt
 
 :gms
 set s=
@@ -796,7 +796,7 @@ reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d
 reg add "HKCU\Software\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto gms
+goto useropt
 
 :gme
 cls
@@ -805,7 +805,7 @@ reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d
 reg add "HKCU\Software\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto gms
+goto useropt
 
 :gdvr
 set s=
@@ -830,7 +830,7 @@ reg add "HKCU\System\GameConfigStore" /v GameDVR_Enabled /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto gdvr
+goto useropt
 
 :gdvre
 cls
@@ -839,7 +839,7 @@ reg add "HKCU\System\GameConfigStore" /v GameDVR_Enabled /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto gdvr
+goto useropt
 
 :hagss
 set s=
@@ -863,7 +863,7 @@ echo Changing HAGS...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v HwSchMode /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto hagss
+goto useropt
 
 :hagse
 cls
@@ -871,7 +871,7 @@ echo Changing HAGS...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v HwSchMode /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto hagss
+goto useropt
 
 :vrrs
 set s=
@@ -895,7 +895,7 @@ echo Changing VRR...
 reg add "HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences" /v DirectXUserGlobalSettings /t REG_SZ /d "VRROptimizeEnable=1;" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto vrrs
+goto useropt
 
 :vrre
 cls
@@ -903,7 +903,7 @@ echo Changing VRR...
 reg add "HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences" /v DirectXUserGlobalSettings /t REG_SZ /d "VRROptimizeEnable=0;" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto vrrs
+goto useropt
 
 :wpo
 cls
@@ -939,7 +939,7 @@ echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 8192" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pfs
+goto useropt
 
 :pfs2
 cls
@@ -947,7 +947,7 @@ echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 4096" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pfs
+goto useropt
 
 :pfs3
 cls
@@ -955,7 +955,7 @@ echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 2048" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pfs
+goto useropt
 
 :pfs4
 cls
@@ -963,7 +963,7 @@ echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto pfs
+goto useropt
 
 :: Privacy tweaks section
 
@@ -1073,7 +1073,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v Value /t REG_SZ /d "Deny" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto caat
+goto privtw
 
 :caat2
 cls
@@ -1134,7 +1134,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v Value /t REG_SZ /d "Allow" /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto caat
+goto privtw
 
 :dcss
 set s=
@@ -1167,7 +1167,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /v Start /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto dcss
+goto privtw
 
 :dcss2
 cls
@@ -1184,7 +1184,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /v Start /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /v Start /t REG_DWORD /d 3 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto dcss
+goto privtw
 
 :to
 set s=
@@ -1211,7 +1211,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTeleme
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto to
+goto privtw
 
 :to2
 cls
@@ -1222,7 +1222,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTeleme
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto to
+goto privtw
 
 :cdm
 set s=
@@ -1304,7 +1304,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-88000326Enabled /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto cdm
+goto privtw
 
 :cdm2
 cls
@@ -1370,7 +1370,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-88000326Enabled /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto cdm
+goto privtw
 
 :wps
 cls
@@ -1519,7 +1519,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v A
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto wtaat
+goto userint
 
 :wtaat2
 cls
@@ -1528,7 +1528,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v A
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto wtaat
+goto userint
 
 :dwah
 set s=
@@ -1555,7 +1555,7 @@ reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 8 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 8 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto dwah
+goto userint
 
 :dwah2
 cls
@@ -1564,7 +1564,7 @@ reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 6 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 6 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto dwah
+goto userint
 
 :dwah3
 cls
@@ -1573,7 +1573,7 @@ reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 4 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto dwah
+goto userint
 
 :dwah4
 cls
@@ -1582,7 +1582,7 @@ reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 2 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto dwah
+goto userint
 
 :sbo
 set s=
@@ -1615,7 +1615,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearch
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v ConnectedSearchUseWeb /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto sbo
+goto userint
 
 :sbo2
 cls
@@ -1632,7 +1632,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearch
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v ConnectedSearchUseWeb /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto sbo
+goto userint
 
 :: Network tweaks section
 
@@ -1688,7 +1688,7 @@ echo Changing UDP Settings...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v FastSendDatagramThreshold /t REG_DWORD /d 1500 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt1
+goto nwkt
 
 :udp2
 cls
@@ -1696,7 +1696,7 @@ echo Changing UDP Settings...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v FastSendDatagramThreshold /t REG_DWORD /d 64000 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt1
+goto nwkt
 
 :udp3
 cls
@@ -1704,7 +1704,7 @@ echo Changing UDP Settings...
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v FastSendDatagramThreshold /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt1
+goto nwkt
 
 :nwkt2
 set s=
@@ -1728,7 +1728,7 @@ echo Changing TCP Auto-Tuning...
 netsh int tcp set global autotuning=disabled
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt2
+goto nwkt
 
 :tcp2
 cls
@@ -1736,7 +1736,7 @@ echo Changing TCP Auto-Tuning...
 netsh int tcp set global autotuning=normal
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt2
+goto nwkt
 
 :nwkt3
 set s=
@@ -1762,7 +1762,7 @@ ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ServerAddresses (\"1.1.1.1\", \"1.0.0.1\")"
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt3
+goto nwkt
 
 :dns2
 cls
@@ -1771,7 +1771,7 @@ ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ServerAddresses (\"8.8.8.8\", \"8.8.4.4\")"
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt3
+goto nwkt
 
 :dns3
 cls
@@ -1780,7 +1780,7 @@ ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ResetServerAddresses"
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
-goto nwkt3
+goto nwkt
 
 :: Graphics tweaking apps section
 
