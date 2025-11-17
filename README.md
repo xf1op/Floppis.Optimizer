@@ -1,6 +1,6 @@
 # Floppi's Optimizer - Windows 10/11 AiO batch script.
 
-A script that will manage your windows settings in various sections from system optimizations to tweaking tools. All changes are reversible within the use of this script, so do not worry about losing default values.
+An all-in-one script that will manage your windows settings in various sections from system optimizations to tweaking tools. All changes are reversible within the use of this script, so do not worry about losing default values.
 
 Main menu of the script.
 
