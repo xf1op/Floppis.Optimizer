@@ -1,6 +1,6 @@
-# Floppi's Optimizer - Windows 10/11 optimization batch script.
+# Floppi's Optimizer - Windows 10/11 AiO batch script.
 
-A script that will optimize or rather TRY to optimize and enhance privacy of your system by changing various system and user based settings and registry keys. Feel free to give any suggestions for tweaks! I am trying my best to make it the best.
+A script that will manage your windows settings in various sections from system optimizations to tweaking tools. All changes are reversible within the use of this script, so do not worry about losing default values.
 
 Main menu of the script.
 
@@ -9,12 +9,17 @@ Main menu of the script.
 Trying to make it simple and reliable.
 
 ## Purpose of the optimizer:
-- Enhance your privacy (disabling tracking, telemetry, Recall, etc.)
-- Change your interface (dark\light theme, etc.)
-- Disable unnecessary settings 
+- Be reversible in changes
+- Disable unnecessary services
+- Download and use tweaking tools
+- Enhance your privacy
+- Improve performance
+- Keep everything compatible
+- Manage your desktop settings
 - Optimize system functionality
-- Save your bandwidth? (disabling windows update)
+- Save your bandwidth
 
 Why you shouldn't worry about viruses? Because code is free to check for viruses and i didn't implement anything malicious.
 
 ### Original link of script: https://github.com/xf1op/Floppis.Optimizer
+Do not trust other links with similar name as mine.
