@@ -36,6 +36,7 @@ goto ext
 :: System Optimizations Section
 
 :sysopt
+mode 82,21
 title Floppi's Optimizer - System Optimizations
 set s=
 cls
@@ -87,7 +88,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
 if '%s%'=='1' (goto wps1) else if '%s%'=='2' (goto wps2) else if '%s%'=='3' (goto wps3)
 if not '%s%'=='0' goto winps
-mode 82,21
 goto sysopt
 
 :wps1
@@ -137,7 +137,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
 if '%s%'=='1' (goto sr1) else if '%s%'=='2' (goto sr2)
 if not '%s%'=='0' goto sysr
-mode 82,21
 goto sysopt
 
 :sr1
@@ -537,7 +536,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
 if '%s%'=='1' (goto smc1) else if '%s%'=='2' (goto smc2)
 if not '%s%'=='0' goto sysmc
-mode 82,21
 goto sysopt
 
 :smc1
@@ -595,7 +593,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
 if '%s%'=='1' (goto stes1) else if '%s%'=='2' (goto stes2)
 if not '%s%'=='0' goto sertimex
-mode 82,21
 goto sysopt
 
 :stes1
@@ -637,7 +634,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
 if '%s%'=='1' (goto bcd1) else if '%s%'=='2' (goto bcd2)
 if not '%s%'=='0' goto bcdtw
-mode 82,21
 goto sysopt
 
 :bcd1
@@ -681,7 +677,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
 if '%s%'=='1' (goto pgt1) else if '%s%'=='2' (goto pgt2) else if '%s%'=='3' (goto pgt3)
 if not '%s%'=='0' goto pgtw
-mode 82,21
 goto sysopt
 
 :pgt1
