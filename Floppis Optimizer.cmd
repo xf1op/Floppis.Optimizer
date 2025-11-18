@@ -77,39 +77,71 @@ echo =-=  Win32PrioritySeparation is a registry key that allows to  =-=
 echo =-=   adjust priority of foreground and background processes   =-=
 echo =-=      which impacts overall performance of the system.      =-=
 echo =-=                                                            =-=
-echo =-= -Values-                                                   =-=
-echo =-= [1] 24 Hex 36 Dec (Best Performance)                       =-=
-echo =-= [2] 28 Hex 40 Dec (Best Low Latency)                       =-=
-echo =-= [3] 26 Hex 38 Dec (Default)                                =-=
+echo =-= -Options-                                                  =-=
+echo =-= [1] Windows 10                                             =-=
+echo =-= [2] Windows 11                                             =-=
+echo =-=                                                            =-=
 echo =-=                                                            =-=
 echo =-=                                                            =-=
 echo =-= [0] Go Back                                                =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto wps1) else if '%s%'=='2' (goto wps2) else if '%s%'=='3' (goto wps3)
+if '%s%'=='1' (goto wps1) else if '%s%'=='2' (goto wps2)
 if not '%s%'=='0' goto winps
 goto sysopt
 
 :wps1
 cls
-echo Changing Registry Value...
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 0x24 /f
-if ErrorLevel 1 (call :adminPerms)
+echo Work In Progress...
 timeout /nobreak 3 >nul
-goto sysopt
+goto winps
 
 :wps2
+set s=
+cls
+echo = Windows 11 (24H2 Build 26100) exclusive values for the system.
+echo.
+echo = -Options-
+echo = [1] Decimal 42 (Best Performance ^& Latency)
+echo = [2] Decimal 41
+echo = [3] Decimal 40
+echo = [4] Decimal 38 (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto w11v1) else if '%s%'=='2' (goto w11v2) else if '%s%'=='3' (goto w11v3) else if '%s%'=='4' (goto w11v4)
+if not '%s%'=='0' goto wps2
+goto winps
+
+:w11v1
 cls
 echo Changing Registry Value...
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 0x28 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 42 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto sysopt
 
-:wps3
+:w11v2
 cls
 echo Changing Registry Value...
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 0x26 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 41 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto sysopt
+
+:w11v3
+cls
+echo Changing Registry Value...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 40 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto sysopt
+
+:w11v4
+cls
+echo Changing Registry Value...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 38 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto sysopt
