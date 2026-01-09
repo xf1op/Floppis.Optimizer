@@ -150,7 +150,7 @@ goto sysopt
 :sr1
 cls
 echo Changing Registry Value...
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 0xa /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 10 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto sysopt
@@ -158,7 +158,7 @@ goto sysopt
 :sr2
 cls
 echo Changing Registry Value...
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 0x14 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 20 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto sysopt
@@ -729,7 +729,7 @@ echo =-= [4] Hardware Accelerated GPU Scheduling Settings                       
 echo =-= [5] Variable Refresh Rate Switch                                           =-=
 echo =-= [6] Windows Performance Options                                            =-=
 echo =-= [7] Adjust Page File Size                                                  =-=
-echo =-=                                                                            =-=
+echo =-= [8] Enable Automatic End Of Unresponsive Tasks                             =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -738,7 +738,7 @@ echo =-=                                                                        
 echo =-= [0] Go To Main Menu                                                        =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto bgapp) else if '%s%'=='2' (goto gms) else if '%s%'=='3' (goto gdvr) else if '%s%'=='4' (goto hagss) else if '%s%'=='5' (goto vrrs) else if '%s%'=='6' (goto wpo) else if '%s%'=='7' (goto pfs)
+if '%s%'=='1' (goto bgapp) else if '%s%'=='2' (goto gms) else if '%s%'=='3' (goto gdvr) else if '%s%'=='4' (goto hagss) else if '%s%'=='5' (goto vrrs) else if '%s%'=='6' (goto wpo) else if '%s%'=='7' (goto pfs) else if '%s%'=='8' (goto aet)
 if not '%s%'=='0' goto useropt
 goto startmenu
 
@@ -968,6 +968,14 @@ if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto useropt
 
+:aet
+cls
+echo Enabling AutoEndTasks...
+reg add "HKCU\Control Panel\Desktop" /v AutoEndTasks /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto useropt
+
 :: Privacy tweaks section
 
 :privtw
@@ -1160,8 +1168,6 @@ cls
 echo Changing Registry Values...
 reg add "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
-reg add "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /v DontSendAdditionalData /t REG_DWORD /d 1 /f
-reg add "HKLM\Software\Microsoft\Windows\Windows Error Reporting" /v DontSendAdditionalData /t REG_DWORD /d 1 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v Start /t REG_DWORD /d 0 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v Status /t REG_DWORD /d 0 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WerSvc" /v Start /t REG_DWORD /d 4 /f
@@ -1208,10 +1214,12 @@ goto privtw
 :to1
 cls
 echo Changing Registry Values...
-reg add "HKCU\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v DoNotShowFeedbackNotifications /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowDeviceNameInTelemetry /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v DisabledByGroupPolicy /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto privtw
@@ -1219,10 +1227,12 @@ goto privtw
 :to2
 cls
 echo Changing Registry Values...
-reg add "HKCU\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v DoNotShowFeedbackNotifications /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowDeviceNameInTelemetry /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v DisabledByGroupPolicy /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto privtw
@@ -1482,7 +1492,7 @@ echo =-=                                                                        
 echo =-= [1] Change Windows Theme And Apps Theme                                    =-=
 echo =-= [2] Change Dragging Width And Height                                       =-=
 echo =-= [3] Change Searchbar Options                                               =-=
-echo =-=                                                                            =-=
+echo =-= [4] Change People/Meet/Task View Buttons                                   =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -1495,7 +1505,7 @@ echo =-=                                                                        
 echo =-= [0] Go To Main Menu                                                        =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto wtaat) else if '%s%'=='2' (goto dwah) else if '%s%'=='3' (goto sbo)
+if '%s%'=='1' (goto wtaat) else if '%s%'=='2' (goto dwah) else if '%s%'=='3' (goto sbo) else if '%s%'=='4' (goto pmtb)
 if not '%s%'=='0' goto userint
 goto startmenu
 
@@ -1637,6 +1647,47 @@ if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto userint
 
+:pmtb
+set s=
+cls
+echo = Change taskbar icons of meet now / people / task view and file moving details.
+echo = Also changes default explorer launch to "This PC". (Revert By Enabling)
+echo.
+echo = -Options-
+echo = [1] Disable Buttons
+echo = [2] Enable Buttons
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto dbut1) else if '%s%'=='2' (goto dbut2)
+if not '%s%'=='0' goto pmtb
+goto userint
+
+:dbut1
+cls
+echo Changing Registry Values...
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" /v EnthusiastMode /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" /v PeopleBand /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v HideSCAMeetNow /t REG_DWORD /d 1 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto userint
+
+:dbut2
+cls
+echo Changing Registry Values...
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" /v EnthusiastMode /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" /v PeopleBand /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 2 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v HideSCAMeetNow /t REG_DWORD /d 0 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto userint
+
 :: Network tweaks section
 
 :nwkt
@@ -1651,8 +1702,8 @@ echo =-=                                                                        
 echo =-= [1] Optimize UDP Connection                                                =-=
 echo =-= [2] Manage TCP Auto-Tuning                                                 =-=
 echo =-= [3] DNS Switcher                                                           =-=
-echo =-=                                                                            =-=
-echo =-=                                                                            =-=
+echo =-= [4] Improve Stack Size For LAN                                             =-=
+echo =-= [5] Fix Latency With NetworkThrottlingIndex                                =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -1664,7 +1715,7 @@ echo =-=                                                                        
 echo =-= [0] Go To Main Menu                                                        =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto nwkt1) else if '%s%'=='2' (goto nwkt2) else if '%s%'=='3' (goto nwkt3)
+if '%s%'=='1' (goto nwkt1) else if '%s%'=='2' (goto nwkt2) else if '%s%'=='3' (goto nwkt3) else if '%s%'=='4' (goto nwkt4) else if '%s%'=='5' (goto nwkt5)
 if not '%s%'=='0' goto nwkt
 goto startmenu
 
@@ -1781,6 +1832,48 @@ cls
 echo Changing DNS...
 ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ResetServerAddresses"
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto nwkt
+
+:nwkt4
+set s=
+cls
+echo = IRPStackSize - How many 36-byte receive buffers your pc can use at once.
+echo.
+echo = -Options-
+echo = [1] 30 (Faster Data Sharing)
+echo = [2] Remove (Default)
+echo.
+echo = [0] Go Back
+echo.
+set /p s=Number: 
+if '%s%'=='1' (goto irp1) else if '%s%'=='2' (goto irp2)
+if not '%s%'=='0' goto nwkt4
+goto nwkt
+
+:irp1
+cls
+echo Changing IRPStackSize Settings...
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v IRPStackSize /t REG_DWORD /d 30 /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto nwkt
+
+:irp2
+cls
+echo Changing IRPStackSize Settings...
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v IRPStackSize /f
+if ErrorLevel 1 (call :adminPerms)
+timeout /nobreak 3 >nul
+goto nwkt
+
+:nwkt5
+cls
+echo Fixing Latency...
+echo This will revert NetworkThrottlingIndex to its default values.
+timeout /nobreak 3 >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v NetworkThrottlingIndex /t REG_DWORD /d 10 /f
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 3 >nul
 goto nwkt
