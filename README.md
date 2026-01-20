@@ -4,7 +4,7 @@ An all-in-one script that will manage your windows settings in various sections 
 
 Main menu of the script.
 
-<img width="658" height="368" alt="image" src="https://github.com/user-attachments/assets/04c32e1d-defa-4b92-834a-d264a7976507"/>
+<img width="658" height="368" alt="image" src="https://github.com/user-attachments/assets/45990ebd-0eb0-4760-9227-5da0c842680b" />
 
 Trying to make it simple and reliable.
 
