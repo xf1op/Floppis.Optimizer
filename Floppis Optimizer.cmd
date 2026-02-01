@@ -2436,6 +2436,8 @@ powershell -Command "Remove-Item -Path "%localappdata%\AMD\*" -Recurse -Force -E
 echo Cleaning temporary internet files
 timeout /nobreak 1 >nul
 powershell -Command "Remove-Item -Path "%localappdata%\Microsoft\Windows\INetCache\IE\*" -Recurse -Force -ErrorAction Ignore"
+echo Using Disk Cleanup Tool
+C:\Windows\system32\cleanmgr.exe /dc /sagerun:9999
 echo.
 echo Finished applying settings! Restart your device immediately!
 pause
