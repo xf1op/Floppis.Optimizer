@@ -20,6 +20,7 @@ If script errors, it will ask you to open it as administrator or just continue.
 - Manage your desktop settings
 - Optimize system functionality
 - Save your bandwidth
+- Cleanup your storage
 
 Why you shouldn't worry about viruses? Because code is free to check for viruses and i didn't implement anything malicious.
 
