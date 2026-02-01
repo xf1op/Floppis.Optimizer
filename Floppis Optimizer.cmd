@@ -20,7 +20,7 @@ echo =-= [4] User Interface Settings                                            
 echo =-= [5] Network Tweaks                                                         =-=
 echo =-= [6] Graphics\GPU Tweaking Apps                                             =-=
 echo =-= [7] Optimization Tools Installer                                           =-=
-echo =-= [8] Disk Cleaning (Soon)                                                   =-=
+echo =-= [8] Storage Cleanup                                                        =-=
 echo =-=                                                                            =-=
 echo =-= [p] Apply Preset With Best Performance                                     =-=
 echo =-=                                                                            =-=
@@ -29,7 +29,7 @@ echo =-=                                                                        
 echo =-= [0] Exit Script (Cleans Temporary Files)                                   =-=
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set /p s=Number: 
-if '%s%'=='1' (goto sysopt) else if '%s%'=='2' (goto useropt) else if '%s%'=='3' (goto privtw) else if '%s%'=='4' (goto userint) else if '%s%'=='5' (goto nwkt) else if '%s%'=='6' (goto gputwapp) else if '%s%'=='7' (goto toolsinst) else if '%s%'=='p' (goto presetInit) else if '%s%'=='!' (goto restartSystem)
+if '%s%'=='1' (goto sysopt) else if '%s%'=='2' (goto useropt) else if '%s%'=='3' (goto privtw) else if '%s%'=='4' (goto userint) else if '%s%'=='5' (goto nwkt) else if '%s%'=='6' (goto gputwapp) else if '%s%'=='7' (goto toolsinst) else if '%s%'=='8' (goto diskcleanup) else if '%s%'=='p' (goto presetInit) else if '%s%'=='!' (goto restartSystem)
 if not '%s%'=='0' goto startmenu
 goto ext
 
@@ -95,7 +95,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 36 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :w11v2
@@ -103,7 +103,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 42 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :w11v3
@@ -111,7 +111,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 40 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :w11v4
@@ -119,7 +119,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v Win32PrioritySeparation /t REG_DWORD /d 38 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :sysr
@@ -152,7 +152,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 10 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :sr2
@@ -160,7 +160,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 20 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :syssrvmg
@@ -212,14 +212,14 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :wse
 cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm2
@@ -246,7 +246,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /v Start /t REG_DWORD /d 4 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdiServiceHost" /v Start /t REG_DWORD /d 4 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdiSystemHost" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :de
 cls
@@ -256,7 +256,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /v Start /t REG_DWORD /d 3 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdiServiceHost" /v Start /t REG_DWORD /d 3 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdiSystemHost" /v Start /t REG_DWORD /d 3 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm3
@@ -280,7 +280,7 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :se
@@ -288,7 +288,7 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm4
@@ -312,14 +312,14 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iphlpsvc" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :ie
 cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iphlpsvc" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :ssm5
 set s=
@@ -342,14 +342,14 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\diagtrack" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :dte
 cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\diagtrack" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm6
@@ -374,7 +374,7 @@ echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer" /v Start /t REG_DWORD /d 4 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :swe
 cls
@@ -382,7 +382,7 @@ echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer" /v Start /t REG_DWORD /d 2 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm7
@@ -407,7 +407,7 @@ echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wpnservice" /v Start /t REG_DWORD /d 4 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wpnuserservice" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :wpne
 cls
@@ -415,7 +415,7 @@ echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wpnservice" /v Start /t REG_DWORD /d 2 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wpnuserservice" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm8
@@ -439,14 +439,14 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\shellHWDetection" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :shwe
 cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\shellHWDetection" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm9
@@ -470,14 +470,14 @@ cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\hidserv" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :he
 cls
 echo Changing Service State...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\hidserv" /v Start /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :ssm10
@@ -508,7 +508,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v SetDisableUX
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 :wupe
 cls
@@ -519,7 +519,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v SetDisableUX
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto syssrvmg
 
 :sysmc
@@ -560,7 +560,7 @@ for /f %%A in ('powershell -command "(Get-MMAgent).MemoryCompression"') do (
         if ErrorLevel 1 (call :adminPerms)
     )
 )
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :smc2
@@ -576,7 +576,7 @@ for /f %%A in ('powershell -command "(Get-MMAgent).MemoryCompression"') do (
         if ErrorLevel 1 (call :adminPerms)
     )
 )
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :sertimex
@@ -609,7 +609,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v SerializeTimerExpiration /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :stes2
@@ -617,7 +617,7 @@ cls
 echo Changing Registry Value...
 reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v SerializeTimerExpiration /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :bcdtw
@@ -651,7 +651,7 @@ echo Changing BCD options...
 bcdedit /set useplatformtick yes
 bcdedit /set disabledynamictick yes
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :bcd2
@@ -660,7 +660,7 @@ echo Changing BCD options...
 bcdedit /deletevalue {current} useplatformtick
 bcdedit /deletevalue {current} disabledynamictick
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :pgtw
@@ -693,7 +693,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 0xffffffff /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :pgt2
@@ -701,7 +701,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :pgt3
@@ -709,7 +709,7 @@ cls
 echo Changing Registry Value...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 0x00380000 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto sysopt
 
 :: User optimizations Section
@@ -765,7 +765,7 @@ echo Changing Registry Value...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :bga2
@@ -774,7 +774,7 @@ echo Changing Registry Value...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :gms
@@ -799,7 +799,7 @@ echo Changing Game Mode...
 reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :gme
@@ -808,7 +808,7 @@ echo Changing Game Mode...
 reg add "HKCU\Software\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :gdvr
@@ -833,7 +833,7 @@ echo Changing Game DVR...
 reg add "HKCU\System\GameConfigStore" /v GameDVR_Enabled /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :gdvre
@@ -842,7 +842,7 @@ echo Changing Game DVR...
 reg add "HKCU\System\GameConfigStore" /v GameDVR_Enabled /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :hagss
@@ -866,7 +866,7 @@ cls
 echo Changing HAGS...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v HwSchMode /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :hagse
@@ -874,7 +874,7 @@ cls
 echo Changing HAGS...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v HwSchMode /t REG_DWORD /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :vrrs
@@ -898,7 +898,7 @@ cls
 echo Changing VRR...
 reg add "HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences" /v DirectXUserGlobalSettings /t REG_SZ /d "VRROptimizeEnable=1;" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :vrre
@@ -906,7 +906,7 @@ cls
 echo Changing VRR...
 reg add "HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences" /v DirectXUserGlobalSettings /t REG_SZ /d "VRROptimizeEnable=0;" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :wpo
@@ -916,7 +916,7 @@ echo.
 echo Choose your preferred option.
 start /wait "" "C:\Windows\System32\SystemPropertiesPerformance.exe"
 echo Going back...
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :pfs
@@ -942,7 +942,7 @@ cls
 echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 8192" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :pfs2
@@ -950,7 +950,7 @@ cls
 echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 4096" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :pfs3
@@ -958,7 +958,7 @@ cls
 echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "C:\pagefile.sys 16 2048" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :pfs4
@@ -966,7 +966,7 @@ cls
 echo Changing Page File Size...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagingFiles /t REG_MULTI_SZ /d "" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :aet
@@ -974,7 +974,7 @@ cls
 echo Enabling AutoEndTasks...
 reg add "HKCU\Control Panel\Desktop" /v AutoEndTasks /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto useropt
 
 :: Privacy tweaks section
@@ -1084,7 +1084,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v Value /t REG_SZ /d "Deny" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v Value /t REG_SZ /d "Deny" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :caat2
@@ -1145,7 +1145,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v Value /t REG_SZ /d "Allow" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v Value /t REG_SZ /d "Allow" /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :dcss
@@ -1176,7 +1176,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\UserDataSvc" /v Start /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /v Start /t REG_DWORD /d 4 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /v Start /t REG_DWORD /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :dcss2
@@ -1193,7 +1193,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\UserDataSvc" /v Start /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /v Start /t REG_DWORD /d 3 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /v Start /t REG_DWORD /d 3 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :to
@@ -1222,7 +1222,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTeleme
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v DisabledByGroupPolicy /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :to2
@@ -1235,7 +1235,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTeleme
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v DisabledByGroupPolicy /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :cdm
@@ -1317,7 +1317,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v RemediationRequired /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-88000326Enabled /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :cdm2
@@ -1383,7 +1383,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v RemediationRequired /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-88000326Enabled /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :wps
@@ -1392,7 +1392,7 @@ echo Disable everything in "Windows permissions"!
 timeout /nobreak 3 >nul
 echo Launching Windows Privacy Settings...
 start "" ms-settings:privacy
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :wrf
@@ -1420,7 +1420,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableAIDataAna
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableClickToDo /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableSettingsAgent /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :wrf2
@@ -1432,7 +1432,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableAIDataAna
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableClickToDo /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableSettingsAgent /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :ccm
@@ -1462,7 +1462,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableThirdP
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWelcomeExperience /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :ccm2
@@ -1476,7 +1476,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableThirdP
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWelcomeExperience /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto privtw
 
 :: User interface settings section
@@ -1532,7 +1532,7 @@ echo Changing Registry Values...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :wtaat2
@@ -1541,7 +1541,7 @@ echo Changing Registry Values...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :dwah
@@ -1568,7 +1568,7 @@ echo Changing Registry Values...
 reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 8 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 8 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :dwah2
@@ -1577,7 +1577,7 @@ echo Changing Registry Values...
 reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 6 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 6 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :dwah3
@@ -1586,7 +1586,7 @@ echo Changing Registry Values...
 reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 4 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 4 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :dwah4
@@ -1595,7 +1595,7 @@ echo Changing Registry Values...
 reg add "HKCU\Control Panel\Desktop" /v DragWidth /t REG_SZ /d 2 /f
 reg add "HKCU\Control Panel\Desktop" /v DragHeight /t REG_SZ /d 2 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :sbo
@@ -1628,7 +1628,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortan
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearchToUseLocation /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v ConnectedSearchUseWeb /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :sbo2
@@ -1645,7 +1645,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortan
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearchToUseLocation /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v ConnectedSearchUseWeb /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :pmtb
@@ -1674,7 +1674,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v HideSCAMeetNow /t REG_DWORD /d 1 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :dbut2
@@ -1686,7 +1686,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 2 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v HideSCAMeetNow /t REG_DWORD /d 0 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto userint
 
 :: Network tweaks section
@@ -1742,7 +1742,7 @@ cls
 echo Changing UDP Settings...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v FastSendDatagramThreshold /t REG_DWORD /d 1500 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :udp2
@@ -1750,7 +1750,7 @@ cls
 echo Changing UDP Settings...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v FastSendDatagramThreshold /t REG_DWORD /d 64000 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :udp3
@@ -1758,7 +1758,7 @@ cls
 echo Changing UDP Settings...
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v FastSendDatagramThreshold /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :nwkt2
@@ -1782,7 +1782,7 @@ cls
 echo Changing TCP Auto-Tuning...
 netsh int tcp set global autotuning=disabled
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :tcp2
@@ -1790,7 +1790,7 @@ cls
 echo Changing TCP Auto-Tuning...
 netsh int tcp set global autotuning=normal
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :nwkt3
@@ -1816,7 +1816,7 @@ echo Changing DNS...
 ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ServerAddresses (\"1.1.1.1\", \"1.0.0.1\")"
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :dns2
@@ -1825,7 +1825,7 @@ echo Changing DNS...
 ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ServerAddresses (\"8.8.8.8\", \"8.8.4.4\")"
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :dns3
@@ -1834,7 +1834,7 @@ echo Changing DNS...
 ipconfig /flushdns
 powershell -Command "Set-DNSClientServerAddress \"*\" -ResetServerAddresses"
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :nwkt4
@@ -1858,7 +1858,7 @@ cls
 echo Changing IRPStackSize Settings...
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v IRPStackSize /t REG_DWORD /d 30 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :irp2
@@ -1866,7 +1866,7 @@ cls
 echo Changing IRPStackSize Settings...
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v IRPStackSize /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :nwkt5
@@ -1876,7 +1876,7 @@ echo This will revert NetworkThrottlingIndex to its default values.
 timeout /nobreak 3 >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v NetworkThrottlingIndex /t REG_DWORD /d 10 /f
 if ErrorLevel 1 (call :adminPerms)
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto nwkt
 
 :: Graphics tweaking apps section
@@ -1981,7 +1981,7 @@ powershell -Command "Invoke-WebRequest -Uri 'https://github.com/henrypp/memreduc
 timeout /nobreak 2 >nul
 echo Starting Installer...
 start "" memreduct.exe
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto toolsinst
 
 :ti2
@@ -1991,7 +1991,7 @@ powershell -Command "Invoke-WebRequest -Uri 'https://dl.bitsum.com/files/process
 timeout /nobreak 2 >nul
 echo Starting App...
 start "" processlasso.exe
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto toolsinst
 
 :ti3
@@ -2003,7 +2003,7 @@ tar -xf "%Fdir%\wpd.zip"
 timeout /nobreak 2 >nul
 echo Starting App...
 for %%F in ("%Fdir%\WPD*.exe") do start "" "%%F"
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto toolsinst
 
 :ti4
@@ -2013,7 +2013,7 @@ powershell -Command "Invoke-WebRequest -Uri 'https://dl5.oo-software.com/files/o
 timeout /nobreak 2 >nul
 echo Starting App...
 start "" OOSU.exe
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto toolsinst
 
 
@@ -2024,8 +2024,110 @@ powershell -Command "Invoke-WebRequest -Uri 'https://dl5.oo-software.com/files/o
 timeout /nobreak 2 >nul
 echo Starting App...
 start "" OOAB.exe
-timeout /nobreak 3 >nul
+timeout /nobreak 2 >nul
 goto toolsinst
+
+:: Disk Cleanup Section
+
+:diskcleanup
+title Floppi's Optimizer - Storage Cleanup
+set s=
+cls
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Floppi's Optimizer =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Storage Cleanup-                                                          =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo =-= -Options-                                                                  =-=
+echo =-=                                                                            =-=
+echo =-= [1] Clean Temporary Files (%%temp%%)                                         =-=
+echo =-= [2] Clean Prefetch Folder                                                  =-=
+echo =-= [3] Clean Windows Update Cache                                             =-=
+echo =-= [4] Clean Windows Log Files                                                =-=
+echo =-= [5] Clean Windows Event Logs                                               =-=
+echo =-= [6] Clean AMD / NVIDIA Cache                                               =-=
+echo =-= [7] Clean Temporary Internet Files                                         =-=
+echo =-= [8] Windows Disk Cleanup Tool                                              =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-=                                                                            =-=
+echo =-= [0] Go To Main Menu                                                        =-=
+echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set /p s=Number: 
+if '%s%'=='1' (goto ctf) else if '%s%'=='2' (goto cpf) else if '%s%'=='3' (goto cwu) else if '%s%'=='4' (goto cwlf) else if '%s%'=='5' (goto cwel) else if '%s%'=='6' (goto cANc) else if '%s%'=='7' (goto ctif) else if '%s%'=='8' (goto wdct)
+if not '%s%'=='0' goto diskcleanup
+goto startmenu
+
+:ctf
+cls
+echo Cleaning temporary files
+powershell -Command "Remove-Item -Path "%temp%\*" -Recurse -Force -ErrorAction Ignore"
+echo Temporary files are cleaned!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:cpf
+cls
+wevtutil cl system 2>nul >nul
+if ErrorLevel 1 (echo This requires Administrator permissions! && call :adminPerms)
+echo Cleaning prefetch folder
+powershell -Command "Remove-Item -Path "c:\Windows\Prefetch\*" -Recurse -Force -ErrorAction Ignore"
+echo Prefetch cleaned!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:cwu
+cls
+wevtutil cl system 2>nul >nul
+if ErrorLevel 1 (echo This requires Administrator permissions! && call :adminPerms)
+echo Cleaning Windows Update cache
+powershell -Command "Remove-Item -Path "c:\Windows\SoftwareDistribution\*" -Recurse -Force -ErrorAction Ignore"
+echo Cache cleaned!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:cwlf
+cls
+wevtutil cl system 2>nul >nul
+if ErrorLevel 1 (echo This requires Administrator permissions! && call :adminPerms)
+echo Cleaning windows log files
+rd "c:\Windows\Logs" /s /q 2>nul >nul
+echo Windows logs cleaned!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:cwel
+cls
+wevtutil cl system 2>nul >nul
+if ErrorLevel 1 (echo This requires Administrator permissions! && call :adminPerms)
+echo Cleaning windows event logs
+powershell -Command "wevtutil el | ForEach-Object { wevtutil cl $_ }" 2>nul >nul
+echo Finished cleaning!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:cANc
+cls
+echo Removing cache in NVIDIA folder
+powershell -Command "Remove-Item -Path "%localappdata%\NVIDIA\*" -Recurse -Force -ErrorAction Ignore"
+echo Removing cache in AMD folder
+powershell -Command "Remove-Item -Path "%localappdata%\AMD\*" -Recurse -Force -ErrorAction Ignore"
+echo AMD and NVIDIA cache cleaned!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:ctif
+cls
+echo Removing internet cache
+powershell -Command "Remove-Item -Path "%localappdata%\Microsoft\Windows\INetCache\IE\*" -Recurse -Force -ErrorAction Ignore"
+echo Temporary internet files cleaned!
+timeout /nobreak 2 >nul
+goto diskcleanup
+
+:wdct
+start "" C:\Windows\system32\cleanmgr.exe /dc
+goto diskcleanup
+
 
 :: Exit Section
 
@@ -2034,11 +2136,13 @@ cd %temp%
 rd %temp%\FOptimizer /s /q
 exit
 
+:: Preset Applying Section
+
 :presetInit
 cls
 echo Everything Changed Can Be Reverted!
-Echo Starting To Apply Preset...
-timeout 5 /nobreak >nul
+echo Applying Preset!
+timeout 3 /nobreak >nul
 cls
 echo Setting Best Priority Separation...
 timeout 1 /nobreak >nul
@@ -2310,19 +2414,45 @@ netsh int tcp set global autotuning=disabled >nul
 echo Fixing Netwrok Throttling To Default (Less Latency)...
 timeout /nobreak 1 >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v NetworkThrottlingIndex /t REG_DWORD /d 10 /f >nul
+echo Cleaning temporary files
+timeout /nobreak 1 >nul
+powershell -Command "Remove-Item -Path "%temp%\*" -Recurse -Force -ErrorAction Ignore"
+echo Cleaning prefetch
+timeout /nobreak 1 >nul
+powershell -Command "Remove-Item -Path "c:\Windows\Prefetch\*" -Recurse -Force -ErrorAction Ignore"
+echo Cleaning Windows Update cache
+timeout /nobreak 1 >nul
+powershell -Command "Remove-Item -Path "c:\Windows\SoftwareDistribution\*" -Recurse -Force -ErrorAction Ignore"
+echo Cleaning windows log files
+timeout /nobreak 1 >nul
+rd "c:\Windows\Logs" /s /q 2>nul >nul
+echo Cleaning windows event logs
+timeout /nobreak 1 >nul
+powershell -Command "wevtutil el | ForEach-Object { wevtutil cl $_ }" 2>nul >nul
+echo Cleaning AMD and NVIDIA cache
+timeout /nobreak 1 >nul
+powershell -Command "Remove-Item -Path "%localappdata%\NVIDIA\*" -Recurse -Force -ErrorAction Ignore"
+powershell -Command "Remove-Item -Path "%localappdata%\AMD\*" -Recurse -Force -ErrorAction Ignore"
+echo Cleaning temporary internet files
+timeout /nobreak 1 >nul
+powershell -Command "Remove-Item -Path "%localappdata%\Microsoft\Windows\INetCache\IE\*" -Recurse -Force -ErrorAction Ignore"
 echo.
 echo Finished applying settings! Restart your device immediately!
 pause
 goto startmenu
 
+:: Restart Section
+
 :restartSystem
 shutdown /r /t 30
 exit
 
+:: Administrator Permission Section
 :adminPerms
 echo.
 echo Would you like to restart script as Administrator?
-echo [y] Yes   ^|   [ ] Continue
+echo - [y] Yes
+echo - Press Enter to continue script without administrator!
 set /p s=Letter: 
 if /i '%s%'=='y' (
     :: Relaunch the script with admin rights
