@@ -24,7 +24,7 @@ If script errors, it will ask you to open it as administrator or just continue.
 
 Why you shouldn't worry about viruses? Because code is free to check for viruses and i didn't implement anything malicious.
 
-Here are virus scan details: https://www.virustotal.com/gui/file/847a16fedaa9f4f8d4fd738d5c720d5c76a1ecd69d3bff5a792f02332c9324c9/summary
+Here are virus scan details: https://www.virustotal.com/gui/file/90c748048bd72842afe31e712948a853f748b6a3b325b2184f372860032be23c/detection (15.02.2026)
 
 Blocklist domains used (pinged for ip) from https://github.com/hagezi/dns-blocklists/tree/main
 
