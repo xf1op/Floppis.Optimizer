@@ -26,5 +26,7 @@ Why you shouldn't worry about viruses? Because code is free to check for viruses
 
 Here are virus scan details: https://www.virustotal.com/gui/file/847a16fedaa9f4f8d4fd738d5c720d5c76a1ecd69d3bff5a792f02332c9324c9/summary
 
+Blocklist domains used (pinged for ip) from https://github.com/hagezi/dns-blocklists/tree/main
+
 ### Original link of script: https://github.com/xf1op/Floppis.Optimizer / https://github.com/xf1op/Floppis.Optimizer/releases/latest
 Do not trust other links with similar name as mine.
