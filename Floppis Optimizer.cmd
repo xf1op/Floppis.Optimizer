@@ -1226,7 +1226,10 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v DisabledByGroupPolicy /t REG_DWORD /d 1 /f
 echo.
 echo Creating firewall blocklist...
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$tempFile='%temp%\microsoft-blocklist.txt'; try { Invoke-WebRequest 'https://raw.githubusercontent.com/xf1op/Floppis.Optimizer/refs/heads/main/microsoft-mega-blocklist.txt' -OutFile $tempFile -UseBasicParsing; Write-Host 'Blocklist downloaded.' -ForegroundColor Cyan; $rawLines=Get-Content '$tempFile'; $ipList=$rawLines | ForEach-Object { $_.Trim() } | Where-Object { $_ -and $_ -notmatch '^[-]+$' -and $_ -match '^\d{1,3}(\.\d{1,3}){3}$' } | Select-Object -Unique; Write-Host ('Found ' + $ipList.Count + ' IPs.') -ForegroundColor Yellow; if ($ipList.Count -eq 0) { throw 'No valid IPs.' }; $ruleBaseName='Mega Microsoft IP Blocklist'; $direction='Outbound'; $action='Block'; $chunkSize=500; Get-NetFirewallRule -DisplayName ($ruleBaseName + '*') -ErrorAction SilentlyContinue | Remove-NetFirewallRule -Confirm:$false; Write-Host 'Cleaned Old Rules' -ForegroundColor Magenta; $chunkNumber=1; for ($i=0; $i -lt $ipList.Count; $i+=$chunkSize) { $end=[Math]::Min($i+$chunkSize-1,$ipList.Count-1); $chunk=$ipList[$i..$end]; $ruleName=if ($chunkNumber -eq 1) { $ruleBaseName } else { $ruleBaseName + ' - Part ' + $chunkNumber }; New-NetFirewallRule -DisplayName $ruleName -Direction $direction -Action $action -RemoteAddress $chunk -Protocol Any -Enabled True | Out-Null; Write-Host ('Created ' + $ruleName + ' with ' + $chunk.Count + ' IPs (Total: ' + ($i+$chunk.Count) + ')') -ForegroundColor Green; $chunkNumber++ }; Write-Host ($ipList.Count.ToString() + ' IPs blocked in ' + ($chunkNumber-1) + ' parts!') -ForegroundColor White } catch { Write-Host ('Error: ' + $_.Exception.Message) -ForegroundColor Red } finally { if (Test-Path $tempFile) { Remove-Item $tempFile -Force } }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$tempFile='%temp%\microsoft-blocklist.txt'; try { Invoke-WebRequest 'https://raw.githubusercontent.com/xf1op/Floppis.Optimizer/refs/heads/main/microsoft-mega-blocklist.txt' -OutFile %Fdir%\FirewallBlocklist.txt -UseBasicParsing; Write-Host 'Blocklist downloaded.' -ForegroundColor Cyan; $rawLines=Get-Content '%Fdir%\FirewallBlocklist.txt'; $ipList=$rawLines | ForEach-Object { $_.Trim() } | Where-Object { $_ -and $_ -notmatch '^[-]+$' -and $_ -match '^\d{1,3}(\.\d{1,3}){3}$' } | Select-Object -Unique; Write-Host ('Found ' + $ipList.Count + ' IPs.') -ForegroundColor Yellow; if ($ipList.Count -eq 0) { throw 'No valid IPs.' }; $ruleBaseName='Mega Microsoft IP Blocklist'; $direction='Outbound'; $action='Block'; $chunkSize=500; Get-NetFirewallRule -DisplayName ($ruleBaseName + '*') -ErrorAction SilentlyContinue | Remove-NetFirewallRule -Confirm:$false; Write-Host 'Cleaned Old Rules' -ForegroundColor Magenta; $chunkNumber=1; for ($i=0; $i -lt $ipList.Count; $i+=$chunkSize) { $end=[Math]::Min($i+$chunkSize-1,$ipList.Count-1); $chunk=$ipList[$i..$end]; $ruleName=if ($chunkNumber -eq 1) { $ruleBaseName } else { $ruleBaseName + ' - Part ' + $chunkNumber }; New-NetFirewallRule -DisplayName $ruleName -Direction $direction -Action $action -RemoteAddress $chunk -Protocol Any -Enabled True | Out-Null; Write-Host ('Created ' + $ruleName + ' with ' + $chunk.Count + ' IPs (Total: ' + ($i+$chunk.Count) + ')') -ForegroundColor Green; $chunkNumber++ }; Write-Host ($ipList.Count.ToString() + ' IPs blocked in ' + ($chunkNumber-1) + ' parts!') -ForegroundColor White } catch { Write-Host ('Error: ' + $_.Exception.Message) -ForegroundColor Red } finally { if (Test-Path $tempFile) { Remove-Item $tempFile -Force } }"
+echo.
+echo If there's issues with browsing internet. Make issue on github or dm me.
+echo.
 pause
 goto privtw
 
@@ -1798,7 +1801,7 @@ echo =-= [2] Manage TCP Auto-Tuning                                             
 echo =-= [3] DNS Switcher                                                           =-=
 echo =-= [4] Improve Stack Size For LAN                                             =-=
 echo =-= [5] Fix Latency With NetworkThrottlingIndex                                =-=
-echo =-=                                                                            =-=
+echo =-= [6] Disable Additional Network Settings (ipv6, etc)                        =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
 echo =-=                                                                            =-=
@@ -1971,6 +1974,9 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProf
 if ErrorLevel 1 (call :adminPerms)
 timeout /nobreak 2 >nul
 goto nwkt
+
+:nwkt6
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-NetAdapterBinding -Name * | Where Enabled | Where ComponentID -notin ms_tcpip,ms_pacer | Disable-NetAdapterBinding -Confirm:$false"
 
 :: Graphics tweaking apps section
 
